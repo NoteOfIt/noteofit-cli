@@ -34,27 +34,39 @@ var wsre = regexp.MustCompile("\\s")
 
 func (p *PostCmd) SetFlags(f *flag.FlagSet) {}
 func (p *PostCmd) Execute(_ context.Context, _ *flag.FlagSet, _ ...interface{}) subcommands.ExitStatus {
-	if p.editor != "" {
-		body, err := execEditor(p.editor)
+	stat, _ := os.Stdin.Stat()
+
+	var body []byte
+	var err error
+
+	if (stat.Mode()&os.ModeCharDevice) == 0 || p.editor == "" {
+		body, err = ioutil.ReadAll(os.Stdin)
 		if err != nil {
 			log.Println(err)
 			return subcommands.ExitFailure
 		}
 
-		n := &sdk.Note{
-			CurrentText: &sdk.NoteText{
-				NoteTextValue: string(body),
-			},
-		}
-
-		n2, err := p.api.PostNewNote(n)
+	} else if p.editor != "" {
+		body, err = execEditor(p.editor)
 		if err != nil {
 			log.Println(err)
 			return subcommands.ExitFailure
 		}
-
-		fmt.Println(n.NoteID, getTitleLine(n2.CurrentText.NoteTextValue))
 	}
+
+	n := &sdk.Note{
+		CurrentText: &sdk.NoteText{
+			NoteTextValue: string(body),
+		},
+	}
+
+	n2, err := p.api.PostNewNote(n)
+	if err != nil {
+		log.Println(err)
+		return subcommands.ExitFailure
+	}
+
+	fmt.Println(n2.NoteID, getTitleLine(n2.CurrentText.NoteTextValue))
 
 	return subcommands.ExitSuccess
 }
