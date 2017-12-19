@@ -15,25 +15,25 @@ import (
 	"github.com/google/subcommands"
 )
 
-type PostCmd struct {
+type NewCmd struct {
 	editor string
 
 	config *noteofitcli.Config
 	api    *sdk.AuthenticatedAPI
 }
 
-func (*PostCmd) Name() string     { return "post" }
-func (*PostCmd) Synopsis() string { return "post a new note." }
-func (*PostCmd) Usage() string {
-	return `post:
+func (*NewCmd) Name() string     { return "new" }
+func (*NewCmd) Synopsis() string { return "post a new note." }
+func (*NewCmd) Usage() string {
+	return `new:
 	post a new note.
   `
 }
 
 var wsre = regexp.MustCompile("\\s")
 
-func (p *PostCmd) SetFlags(f *flag.FlagSet) {}
-func (p *PostCmd) Execute(_ context.Context, _ *flag.FlagSet, _ ...interface{}) subcommands.ExitStatus {
+func (p *NewCmd) SetFlags(f *flag.FlagSet) {}
+func (p *NewCmd) Execute(_ context.Context, _ *flag.FlagSet, _ ...interface{}) subcommands.ExitStatus {
 	stat, _ := os.Stdin.Stat()
 
 	var body []byte
@@ -47,7 +47,7 @@ func (p *PostCmd) Execute(_ context.Context, _ *flag.FlagSet, _ ...interface{}) 
 		}
 
 	} else if p.editor != "" {
-		body, err = execEditor(p.editor)
+		body, err = execEditor(p.editor, "")
 		if err != nil {
 			log.Println(err)
 			return subcommands.ExitFailure
@@ -71,11 +71,11 @@ func (p *PostCmd) Execute(_ context.Context, _ *flag.FlagSet, _ ...interface{}) 
 	return subcommands.ExitSuccess
 }
 
-func execEditor(editor string) ([]byte, error) {
+func execEditor(editor, text string) ([]byte, error) {
 	parts := wsre.Split(editor, -1)
 
 	tmpfile, err := ioutil.TempFile("", "post")
-	tmpfile.WriteString("<new note text>")
+	tmpfile.WriteString(text)
 	tmpPath := tmpfile.Name()
 	tmpfile.Close()
 	if err != nil {

@@ -25,7 +25,10 @@ func main() {
 	subcommands.Register(subcommands.CommandsCommand(), "")
 	subcommands.Register(&InitCmd{config, uapi}, "")
 	subcommands.Register(&ListCmd{aapi}, "")
-	subcommands.Register(&PostCmd{"subl -n -w", config, aapi}, "")
+	subcommands.Register(&GetCmd{"vim", aapi}, "")
+	subcommands.Register(&DeleteCmd{api: aapi}, "")
+	subcommands.Register(&NewCmd{"vim", config, aapi}, "")
+	subcommands.Register(&EditCmd{"vim", aapi}, "")
 
 	flag.Parse()
 	ctx := context.Background()
