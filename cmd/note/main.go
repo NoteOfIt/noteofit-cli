@@ -17,22 +17,27 @@ func main() {
 		log.Fatal(err)
 	}
 
+	editor := config.GetEditor()
+	if editor == "" {
+		editor = os.Getenv("EDITOR")
+	}
+
 	uapi := &sdk.UnauthenticatedAPI{}
 	aapi := sdk.NewAuthenticatedApi(config.GetToken())
 
 	subcommands.Register(subcommands.HelpCommand(), "")
 	subcommands.Register(subcommands.FlagsCommand(), "")
 	subcommands.Register(subcommands.CommandsCommand(), "")
+
 	subcommands.Register(&InitCmd{config, uapi}, "")
+
 	subcommands.Register(&ListCmd{aapi}, "")
-	subcommands.Register(&GetCmd{"vim", aapi}, "")
+	subcommands.Register(&GetCmd{aapi}, "")
 	subcommands.Register(&DeleteCmd{api: aapi}, "")
-	subcommands.Register(&NewCmd{"vim", config, aapi}, "")
-	subcommands.Register(&EditCmd{"vim", aapi}, "")
+	subcommands.Register(&NewCmd{editor, config, aapi}, "")
+	subcommands.Register(&EditCmd{editor, aapi}, "")
 
 	flag.Parse()
 	ctx := context.Background()
 	os.Exit(int(subcommands.Execute(ctx)))
-
-	// aapi.
 }

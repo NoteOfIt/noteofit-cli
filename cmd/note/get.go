@@ -12,8 +12,6 @@ import (
 )
 
 type GetCmd struct {
-	getor string
-
 	api *sdk.AuthenticatedAPI
 }
 

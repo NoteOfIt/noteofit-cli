@@ -9,6 +9,7 @@ import (
 )
 
 const keyToken = "token"
+const editorToken = "editor"
 
 type Config struct {
 	settings *appsettings.AppSettings
@@ -47,5 +48,19 @@ func (c *Config) GetToken() string {
 
 func (c *Config) SetToken(s string) {
 	c.settings.SetString(keyToken, s)
+	c.settings.Persist()
+}
+
+func (c *Config) GetEditor() string {
+	s, err := c.settings.GetString(editorToken)
+	if err != nil {
+		return ""
+	}
+
+	return s
+}
+
+func (c *Config) SetEditor(s string) {
+	c.settings.SetString(editorToken, s)
 	c.settings.Persist()
 }
