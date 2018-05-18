@@ -7,7 +7,7 @@ import (
 	"log"
 	"strings"
 
-	sdk "github.com/NoteOfIt/sdk-go"
+	sdk "github.com/Noteof/sdk-go"
 	"github.com/google/subcommands"
 )
 

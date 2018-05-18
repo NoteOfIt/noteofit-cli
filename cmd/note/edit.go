@@ -7,8 +7,8 @@ import (
 	"log"
 	"strconv"
 
-	noteofitcli "github.com/NoteOfIt/noteofit-cli"
-	sdk "github.com/NoteOfIt/sdk-go"
+	noteofitcli "github.com/Noteof/noteof-cli"
+	sdk "github.com/Noteof/sdk-go"
 	"github.com/google/subcommands"
 )
 
