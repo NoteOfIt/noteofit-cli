@@ -17,7 +17,7 @@ type DeleteCmd struct {
 }
 
 func (*DeleteCmd) Name() string     { return "delete" }
-func (*DeleteCmd) Synopsis() string { return "delete a note." }
+func (*DeleteCmd) Synopsis() string { return "delete a note" }
 func (*DeleteCmd) Usage() string {
 	return `list:
 	list your notes.

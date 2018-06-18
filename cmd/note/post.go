@@ -19,7 +19,7 @@ type NewCmd struct {
 }
 
 func (*NewCmd) Name() string     { return "new" }
-func (*NewCmd) Synopsis() string { return "post a new note." }
+func (*NewCmd) Synopsis() string { return "post a new note" }
 func (*NewCmd) Usage() string {
 	return `new:
 	post a new note.

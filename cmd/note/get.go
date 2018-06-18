@@ -16,7 +16,7 @@ type GetCmd struct {
 }
 
 func (*GetCmd) Name() string     { return "get" }
-func (*GetCmd) Synopsis() string { return "get a note." }
+func (*GetCmd) Synopsis() string { return "get a note" }
 func (*GetCmd) Usage() string {
 	return `get <noteID>:
 	get a note.

@@ -21,7 +21,7 @@ type InitCmd struct {
 }
 
 func (*InitCmd) Name() string     { return "init" }
-func (*InitCmd) Synopsis() string { return "Initialize the noteofit cli." }
+func (*InitCmd) Synopsis() string { return "initialize the noteofit cli" }
 func (*InitCmd) Usage() string {
 	return `init:
 	Initialize the noteofit cli.

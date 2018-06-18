@@ -16,7 +16,7 @@ type ListCmd struct {
 }
 
 func (*ListCmd) Name() string     { return "list" }
-func (*ListCmd) Synopsis() string { return "list your notes." }
+func (*ListCmd) Synopsis() string { return "list your notes" }
 func (*ListCmd) Usage() string {
 	return `list:
 	list your notes.

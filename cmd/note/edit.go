@@ -19,7 +19,7 @@ type EditCmd struct {
 }
 
 func (*EditCmd) Name() string     { return "edit" }
-func (*EditCmd) Synopsis() string { return "edit a note." }
+func (*EditCmd) Synopsis() string { return "edit a note" }
 func (*EditCmd) Usage() string {
 	return `edit <noteID>:
 	edit a note.
