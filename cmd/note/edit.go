@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"strconv"
+	"strings"
 
 	noteofitcli "github.com/Noteof/noteof-cli"
 	sdk "github.com/Noteof/sdk-go"
@@ -28,8 +29,13 @@ func (*EditCmd) Usage() string {
 
 func (p *EditCmd) SetFlags(f *flag.FlagSet) {}
 func (p *EditCmd) Execute(_ context.Context, fs *flag.FlagSet, _ ...interface{}) subcommands.ExitStatus {
-	if fs.NArg() != 1 {
+	if fs.NArg() < 1 {
 		log.Fatal("Expects exactly one noteID argument")
+	}
+
+	editor := p.editor
+	if fs.NArg() > 1 {
+		editor = strings.Join(fs.Args()[1:], " ")
 	}
 
 	i, err := strconv.ParseInt(fs.Args()[0], 10, 64)
@@ -42,7 +48,7 @@ func (p *EditCmd) Execute(_ context.Context, fs *flag.FlagSet, _ ...interface{})
 		log.Fatal(err)
 	}
 
-	body, err := noteofitcli.Edit(p.editor, n.CurrentText.NoteTextValue)
+	body, err := noteofitcli.Edit(editor, n.CurrentText.NoteTextValue)
 	if err != nil {
 		log.Println(err)
 		return subcommands.ExitFailure
