@@ -6,13 +6,13 @@ import (
 	"log"
 	"os"
 
-	noteofitcli "github.com/Noteof/noteof-cli"
+	noteofcli "github.com/Noteof/noteof-cli"
 	sdk "github.com/Noteof/sdk-go"
 	"github.com/google/subcommands"
 )
 
 func main() {
-	config, err := noteofitcli.NewConfig()
+	config, err := noteofcli.NewConfig()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,9 +31,14 @@ func main() {
 
 	subcommands.Register(&InitCmd{config, uapi}, "")
 
-	subcommands.Register(&ListCmd{aapi}, "")
+	list := &ListCmd{aapi}
+	subcommands.Register(list, "")
+	subcommands.Register(subcommands.Alias("ls", list), "")
 	subcommands.Register(&GetCmd{aapi}, "")
-	subcommands.Register(&DeleteCmd{api: aapi}, "")
+
+	delete := &DeleteCmd{api: aapi}
+	subcommands.Register(delete, "")
+	subcommands.Register(subcommands.Alias("rm", delete), "")
 	subcommands.Register(&NewCmd{editor, config, aapi}, "")
 	subcommands.Register(&EditCmd{editor, aapi}, "")
 

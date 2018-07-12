@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"log"
 
-	noteofitcli "github.com/Noteof/noteof-cli"
+	noteofcli "github.com/Noteof/noteof-cli"
 	sdk "github.com/Noteof/sdk-go"
 	"github.com/google/subcommands"
 )
@@ -14,7 +14,7 @@ import (
 type NewCmd struct {
 	editor string
 
-	config *noteofitcli.Config
+	config *noteofcli.Config
 	api    *sdk.AuthenticatedAPI
 }
 
@@ -28,7 +28,7 @@ func (*NewCmd) Usage() string {
 
 func (p *NewCmd) SetFlags(f *flag.FlagSet) {}
 func (p *NewCmd) Execute(_ context.Context, _ *flag.FlagSet, _ ...interface{}) subcommands.ExitStatus {
-	body, err := noteofitcli.Edit(p.editor, "")
+	body, err := noteofcli.Edit(p.editor, "")
 	if err != nil {
 		log.Println(err)
 		return subcommands.ExitFailure

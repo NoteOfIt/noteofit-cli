@@ -1,4 +1,4 @@
-package noteofitcli
+package noteofcli
 
 import (
 	"fmt"

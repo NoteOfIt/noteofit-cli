@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	noteofitcli "github.com/Noteof/noteof-cli"
+	noteofcli "github.com/Noteof/noteof-cli"
 	sdk "github.com/Noteof/sdk-go"
 	"github.com/google/subcommands"
 )
@@ -48,7 +48,7 @@ func (p *EditCmd) Execute(_ context.Context, fs *flag.FlagSet, _ ...interface{})
 		log.Fatal(err)
 	}
 
-	body, err := noteofitcli.Edit(editor, n.CurrentText.NoteTextValue)
+	body, err := noteofcli.Edit(editor, n.CurrentText.NoteTextValue)
 	if err != nil {
 		log.Println(err)
 		return subcommands.ExitFailure

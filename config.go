@@ -1,4 +1,4 @@
-package noteofitcli
+package noteofcli
 
 import (
 	"errors"
@@ -16,7 +16,7 @@ type Config struct {
 }
 
 func NewConfig() (*Config, error) {
-	configDirs := configdir.New("donatstudios", "noteofit-cli")
+	configDirs := configdir.New("donatstudios", "noteof-cli")
 
 	folders := configDirs.QueryFolders(configdir.Global)
 	cache := configDirs.QueryFolders(configdir.Cache)

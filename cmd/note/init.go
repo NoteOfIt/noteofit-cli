@@ -9,22 +9,22 @@ import (
 	"strings"
 	"syscall"
 
-	noteofitcli "github.com/Noteof/noteof-cli"
+	noteofcli "github.com/Noteof/noteof-cli"
 	sdk "github.com/Noteof/sdk-go"
 	"github.com/google/subcommands"
 	"golang.org/x/crypto/ssh/terminal"
 )
 
 type InitCmd struct {
-	config *noteofitcli.Config
+	config *noteofcli.Config
 	api    *sdk.UnauthenticatedAPI
 }
 
 func (*InitCmd) Name() string     { return "init" }
-func (*InitCmd) Synopsis() string { return "initialize the noteofit cli" }
+func (*InitCmd) Synopsis() string { return "initialize the noteof cli" }
 func (*InitCmd) Usage() string {
 	return `init:
-	Initialize the noteofit cli.
+	Initialize the noteof cli.
   `
 }
 
@@ -40,7 +40,7 @@ func (p *InitCmd) Execute(_ context.Context, _ *flag.FlagSet, _ ...interface{}) 
 			return subcommands.ExitFailure
 		}
 
-		tr, err := p.api.DoAuth(username, password, "noteofit-cli")
+		tr, err := p.api.DoAuth(username, password, "noteof-cli")
 		if err != nil {
 			continue
 		}
