@@ -22,6 +22,10 @@ func main() {
 		editor = os.Getenv("EDITOR")
 	}
 
+	if editor == "" {
+		editor = "vi"
+	}
+
 	uapi := &sdk.UnauthenticatedAPI{}
 	aapi := sdk.NewAuthenticatedApi(config.GetToken())
 
