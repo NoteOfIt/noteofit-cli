@@ -35,7 +35,7 @@ func main() {
 
 	subcommands.Register(&InitCmd{config, uapi}, "")
 
-	list := &ListCmd{aapi}
+	list := &ListCmd{api: aapi}
 	subcommands.Register(list, "")
 	subcommands.Register(subcommands.Alias("ls", list), "")
 	subcommands.Register(&GetCmd{aapi}, "")

@@ -12,7 +12,8 @@ import (
 )
 
 type ListCmd struct {
-	api *sdk.AuthenticatedAPI
+	api      *sdk.AuthenticatedAPI
+	archived bool
 }
 
 func (*ListCmd) Name() string     { return "list" }
@@ -23,7 +24,10 @@ func (*ListCmd) Usage() string {
   `
 }
 
-func (p *ListCmd) SetFlags(f *flag.FlagSet) {}
+func (p *ListCmd) SetFlags(f *flag.FlagSet) {
+	f.BoolVar(&p.archived, "a", false, "include archived notes")
+}
+
 func (p *ListCmd) Execute(_ context.Context, _ *flag.FlagSet, _ ...interface{}) subcommands.ExitStatus {
 	notes, err := p.api.GetNotes()
 	if err != nil {
@@ -31,6 +35,9 @@ func (p *ListCmd) Execute(_ context.Context, _ *flag.FlagSet, _ ...interface{}) 
 	}
 
 	for _, n := range notes {
+		if n.Archived && !p.archived {
+			continue
+		}
 		fmt.Println(n.NoteID, getTitleLine(n.CurrentText.NoteTextValue))
 	}
 
