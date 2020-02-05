@@ -25,7 +25,7 @@ func (*InitCmd) Synopsis() string { return "initialize the noteof cli" }
 func (*InitCmd) Usage() string {
 	return `init:
 	Initialize the noteof cli.
-  `
+`
 }
 
 func (p *InitCmd) SetFlags(f *flag.FlagSet) {}

@@ -21,7 +21,7 @@ func (*DeleteCmd) Synopsis() string { return "delete a note" }
 func (*DeleteCmd) Usage() string {
 	return `list:
 	list your notes.
-  `
+`
 }
 
 func (p *DeleteCmd) SetFlags(f *flag.FlagSet) {

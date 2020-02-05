@@ -23,7 +23,7 @@ func (*GetCmd) Synopsis() string { return "get a note" }
 func (*GetCmd) Usage() string {
 	return `get <noteID>:
 	get a note.
-  `
+`
 }
 
 func (p *GetCmd) SetFlags(f *flag.FlagSet) {}

@@ -21,7 +21,7 @@ func (*ListCmd) Synopsis() string { return "list your notes" }
 func (*ListCmd) Usage() string {
 	return `list:
 	list your notes.
-  `
+`
 }
 
 func (p *ListCmd) SetFlags(f *flag.FlagSet) {

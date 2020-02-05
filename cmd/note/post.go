@@ -23,7 +23,7 @@ func (*NewCmd) Synopsis() string { return "post a new note" }
 func (*NewCmd) Usage() string {
 	return `new:
 	post a new note.
-  `
+`
 }
 
 func (p *NewCmd) SetFlags(f *flag.FlagSet) {}
