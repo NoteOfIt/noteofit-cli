@@ -5,10 +5,13 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"os"
 	"strconv"
 
 	sdk "github.com/Noteof/sdk-go"
+	"github.com/charmbracelet/glamour"
 	"github.com/google/subcommands"
+	"github.com/mattn/go-isatty"
 )
 
 type GetCmd struct {
@@ -39,7 +42,16 @@ func (p *GetCmd) Execute(_ context.Context, fs *flag.FlagSet, _ ...interface{}) 
 		log.Fatal(err)
 	}
 
-	fmt.Println(n.CurrentText.NoteTextValue)
+	out := n.CurrentText.NoteTextValue
+
+	if isatty.IsTerminal(os.Stdout.Fd()) {
+		out, err = glamour.Render(out, "notty")
+		if err != nil {
+			fmt.Println(n.CurrentText.NoteTextValue)
+		}
+	}
+
+	fmt.Println(out)
 
 	return subcommands.ExitSuccess
 }
