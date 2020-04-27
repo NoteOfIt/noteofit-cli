@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	noteofcli "github.com/Noteof/noteof-cli"
-	sdk "github.com/Noteof/sdk-go"
+	noteofcli "github.com/NoteOf/noteof-cli"
+	sdk "github.com/NoteOf/sdk-go"
 	"github.com/google/subcommands"
 )
 

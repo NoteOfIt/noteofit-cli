@@ -7,7 +7,7 @@ import (
 	"log"
 	"strconv"
 
-	sdk "github.com/Noteof/sdk-go"
+	sdk "github.com/NoteOf/sdk-go"
 	"github.com/google/subcommands"
 )
 
