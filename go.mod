@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/NoteOf/sdk-go v0.0.0-20200617161410-cebc5191b7f9
-	github.com/charmbracelet/glamour v0.1.0
+	github.com/charmbracelet/glamour v0.2.0
 	github.com/donatj/appsettings v0.3.0
 	github.com/google/subcommands v1.2.0
 	github.com/mattn/go-isatty v0.0.12
